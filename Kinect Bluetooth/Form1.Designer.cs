@@ -45,15 +45,15 @@ namespace Kinect_Bluetooth
             this.InfoTextBox.Location = new System.Drawing.Point(12, 12);
             this.InfoTextBox.Multiline = true;
             this.InfoTextBox.Name = "InfoTextBox";
-            this.InfoTextBox.Size = new System.Drawing.Size(637, 291);
+            this.InfoTextBox.Size = new System.Drawing.Size(637, 372);
             this.InfoTextBox.TabIndex = 0;
             // 
             // SendTextBox
             // 
-            this.SendTextBox.Location = new System.Drawing.Point(12, 309);
+            this.SendTextBox.Location = new System.Drawing.Point(12, 390);
             this.SendTextBox.Multiline = true;
             this.SendTextBox.Name = "SendTextBox";
-            this.SendTextBox.Size = new System.Drawing.Size(487, 129);
+            this.SendTextBox.Size = new System.Drawing.Size(637, 48);
             this.SendTextBox.TabIndex = 1;
             this.SendTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbText_KeyPress);
             // 
@@ -61,9 +61,9 @@ namespace Kinect_Bluetooth
             // 
             this.DevicesListBox.FormattingEnabled = true;
             this.DevicesListBox.ItemHeight = 25;
-            this.DevicesListBox.Location = new System.Drawing.Point(505, 309);
+            this.DevicesListBox.Location = new System.Drawing.Point(655, 184);
             this.DevicesListBox.Name = "DevicesListBox";
-            this.DevicesListBox.Size = new System.Drawing.Size(283, 129);
+            this.DevicesListBox.Size = new System.Drawing.Size(133, 254);
             this.DevicesListBox.TabIndex = 2;
             this.DevicesListBox.DoubleClick += new System.EventHandler(this.listBox1_DoubleClick);
             // 
@@ -102,9 +102,9 @@ namespace Kinect_Bluetooth
             // 
             // GoButton
             // 
-            this.GoButton.Location = new System.Drawing.Point(680, 126);
+            this.GoButton.Location = new System.Drawing.Point(655, 126);
             this.GoButton.Name = "GoButton";
-            this.GoButton.Size = new System.Drawing.Size(75, 33);
+            this.GoButton.Size = new System.Drawing.Size(133, 52);
             this.GoButton.TabIndex = 2;
             this.GoButton.Text = "GO";
             this.GoButton.UseVisualStyleBackColor = true;
