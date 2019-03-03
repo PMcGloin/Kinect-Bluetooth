@@ -67,14 +67,13 @@ namespace Kinect_Bluetooth
             bluetoothReceiverThread.Start();
         }
         
-
-        Guid mUUID = new Guid("00001101-0000-1000-8000-00805F9B34FB");
+        //Guid mUUID = new Guid("00001101-0000-1000-8000-00805F9B34FB"); replaced by BluetoothService.SerialPort
         bool connectionRunning = false;
         public void ReceiverConnectThread()
         {
             connectionRunning = true;
             UpdateUI("Started ... Waiting for Connection ...");
-            BluetoothListener bluetoothListener = new BluetoothListener(mUUID);
+            BluetoothListener bluetoothListener = new BluetoothListener(BluetoothService.SerialPort);
             bluetoothListener.Start();
             BluetoothClient bluetoothConnection = bluetoothListener.AcceptBluetoothClient();
             UpdateUI("Device Connected");
@@ -136,7 +135,7 @@ namespace Kinect_Bluetooth
         {
             BluetoothClient bluetoothClient = new BluetoothClient();
             UpdateUI("Atempting to Connect");
-            bluetoothClient.BeginConnect(deviceInfo.DeviceAddress, mUUID, this.BluetoothSenderConnectCallback, bluetoothClient);
+            bluetoothClient.BeginConnect(deviceInfo.DeviceAddress, BluetoothService.SerialPort, new AsyncCallback(BluetoothSenderConnectCallback), bluetoothClient);
         }
 
         private void BluetoothSenderConnectCallback(IAsyncResult asyncResult)
