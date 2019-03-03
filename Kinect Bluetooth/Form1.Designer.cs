@@ -35,52 +35,52 @@ namespace Kinect_Bluetooth
             this.DevicesListBox = new System.Windows.Forms.ListBox();
             this.connectionType = new System.Windows.Forms.GroupBox();
             this.SendRadioButton = new System.Windows.Forms.RadioButton();
-            this.RecieveRadioButton = new System.Windows.Forms.RadioButton();
+            this.ReceiveRadioButton = new System.Windows.Forms.RadioButton();
             this.GoButton = new System.Windows.Forms.Button();
             this.connectionType.SuspendLayout();
             this.SuspendLayout();
             // 
             // InfoTextBox
             // 
-            this.InfoTextBox.Location = new System.Drawing.Point(12, 12);
+            this.InfoTextBox.Location = new System.Drawing.Point(12, 30);
             this.InfoTextBox.Multiline = true;
             this.InfoTextBox.Name = "InfoTextBox";
-            this.InfoTextBox.Size = new System.Drawing.Size(637, 372);
+            this.InfoTextBox.Size = new System.Drawing.Size(1450, 804);
             this.InfoTextBox.TabIndex = 0;
             // 
             // SendTextBox
             // 
-            this.SendTextBox.Location = new System.Drawing.Point(12, 390);
+            this.SendTextBox.Location = new System.Drawing.Point(12, 840);
             this.SendTextBox.Multiline = true;
             this.SendTextBox.Name = "SendTextBox";
-            this.SendTextBox.Size = new System.Drawing.Size(637, 48);
+            this.SendTextBox.Size = new System.Drawing.Size(1450, 216);
             this.SendTextBox.TabIndex = 1;
-            this.SendTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbText_KeyPress);
+            this.SendTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.SendTextBox_KeyPress);
             // 
             // DevicesListBox
             // 
             this.DevicesListBox.FormattingEnabled = true;
             this.DevicesListBox.ItemHeight = 25;
-            this.DevicesListBox.Location = new System.Drawing.Point(655, 184);
+            this.DevicesListBox.Location = new System.Drawing.Point(1468, 30);
             this.DevicesListBox.Name = "DevicesListBox";
-            this.DevicesListBox.Size = new System.Drawing.Size(133, 254);
+            this.DevicesListBox.Size = new System.Drawing.Size(302, 804);
             this.DevicesListBox.TabIndex = 2;
-            this.DevicesListBox.DoubleClick += new System.EventHandler(this.listBox1_DoubleClick);
+            this.DevicesListBox.DoubleClick += new System.EventHandler(this.DevicesListBox_DoubleClick);
             // 
             // connectionType
             // 
             this.connectionType.Controls.Add(this.SendRadioButton);
-            this.connectionType.Controls.Add(this.RecieveRadioButton);
-            this.connectionType.Location = new System.Drawing.Point(655, 12);
+            this.connectionType.Controls.Add(this.ReceiveRadioButton);
+            this.connectionType.Location = new System.Drawing.Point(1468, 840);
             this.connectionType.Name = "connectionType";
-            this.connectionType.Size = new System.Drawing.Size(133, 108);
+            this.connectionType.Size = new System.Drawing.Size(308, 71);
             this.connectionType.TabIndex = 3;
             this.connectionType.TabStop = false;
             // 
             // SendRadioButton
             // 
             this.SendRadioButton.AutoSize = true;
-            this.SendRadioButton.Location = new System.Drawing.Point(6, 30);
+            this.SendRadioButton.Location = new System.Drawing.Point(209, 30);
             this.SendRadioButton.Name = "SendRadioButton";
             this.SendRadioButton.Size = new System.Drawing.Size(93, 29);
             this.SendRadioButton.TabIndex = 1;
@@ -88,33 +88,33 @@ namespace Kinect_Bluetooth
             this.SendRadioButton.Text = "Send";
             this.SendRadioButton.UseVisualStyleBackColor = true;
             // 
-            // RecieveRadioButton
+            // ReceiveRadioButton
             // 
-            this.RecieveRadioButton.AutoSize = true;
-            this.RecieveRadioButton.Checked = true;
-            this.RecieveRadioButton.Location = new System.Drawing.Point(6, 65);
-            this.RecieveRadioButton.Name = "RecieveRadioButton";
-            this.RecieveRadioButton.Size = new System.Drawing.Size(121, 29);
-            this.RecieveRadioButton.TabIndex = 0;
-            this.RecieveRadioButton.TabStop = true;
-            this.RecieveRadioButton.Text = "Recieve";
-            this.RecieveRadioButton.UseVisualStyleBackColor = true;
+            this.ReceiveRadioButton.AutoSize = true;
+            this.ReceiveRadioButton.Checked = true;
+            this.ReceiveRadioButton.Location = new System.Drawing.Point(6, 30);
+            this.ReceiveRadioButton.Name = "ReceiveRadioButton";
+            this.ReceiveRadioButton.Size = new System.Drawing.Size(121, 29);
+            this.ReceiveRadioButton.TabIndex = 0;
+            this.ReceiveRadioButton.TabStop = true;
+            this.ReceiveRadioButton.Text = "Receive";
+            this.ReceiveRadioButton.UseVisualStyleBackColor = true;
             // 
             // GoButton
             // 
-            this.GoButton.Location = new System.Drawing.Point(655, 126);
+            this.GoButton.Location = new System.Drawing.Point(1468, 917);
             this.GoButton.Name = "GoButton";
-            this.GoButton.Size = new System.Drawing.Size(133, 52);
+            this.GoButton.Size = new System.Drawing.Size(308, 139);
             this.GoButton.TabIndex = 2;
             this.GoButton.Text = "GO";
             this.GoButton.UseVisualStyleBackColor = true;
-            this.GoButton.Click += new System.EventHandler(this.bGo_Click);
+            this.GoButton.Click += new System.EventHandler(this.GoButton_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1788, 1068);
             this.Controls.Add(this.GoButton);
             this.Controls.Add(this.connectionType);
             this.Controls.Add(this.DevicesListBox);
@@ -136,7 +136,7 @@ namespace Kinect_Bluetooth
         private System.Windows.Forms.ListBox DevicesListBox;
         private System.Windows.Forms.GroupBox connectionType;
         private System.Windows.Forms.RadioButton SendRadioButton;
-        private System.Windows.Forms.RadioButton RecieveRadioButton;
+        private System.Windows.Forms.RadioButton ReceiveRadioButton;
         private System.Windows.Forms.Button GoButton;
     }
 }
