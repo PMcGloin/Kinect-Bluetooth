@@ -149,6 +149,7 @@ namespace Kinect_Bluetooth
             {
                 while (!ready) ;
                 bluetoothStream.Write(message, 0, message.Length);
+                ready = false;
             }
         }
 
