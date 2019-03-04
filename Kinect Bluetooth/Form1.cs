@@ -9,6 +9,7 @@ using InTheHand.Net.Ports;
 using InTheHand.Net.Bluetooth;
 using InTheHand.Net.Sockets;
 using System.IO;
+using Microsoft.Kinect;
 
 namespace Kinect_Bluetooth
 {
@@ -19,7 +20,16 @@ namespace Kinect_Bluetooth
         {
             bluetoothDevices = new List<string>();
             InitializeComponent();
+            this.Load += Form1_Load;
         }
+
+        
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            
+        }
+
+        
 
         private void GoButton_Click(object sender, EventArgs e)
         {
@@ -138,17 +148,77 @@ namespace Kinect_Bluetooth
             bluetoothClient.BeginConnect(deviceInfo.DeviceAddress, BluetoothService.SerialPort, new AsyncCallback(BluetoothSenderConnectCallback), bluetoothClient);
         }
 
+        KinectSensor sensor;
+        BodyFrameReader bodyFrameReader;
+        Body[] bodies;
+        byte[] sendAngles;
         private void BluetoothSenderConnectCallback(IAsyncResult asyncResult)
         {
+            
             BluetoothClient bluetoothClient = (BluetoothClient)asyncResult.AsyncState;
+            if (bluetoothClient.Connected == true)
+            {
+                UpdateUI("Bluetooth Connected ... Starting Kinect");
+                sensor = KinectSensor.GetDefault();
+                bodyFrameReader = sensor.BodyFrameSource.OpenReader();
+                sensor.Open();
+                if (this.bodyFrameReader != null)
+                {
+                    this.bodyFrameReader.FrameArrived += this.Reader_FrameArrived;
+                }
+            }
+            else
+            {
+                UpdateUI("Not Connected");
+            }
             bluetoothClient.EndConnect(asyncResult);
             Stream bluetoothStream = bluetoothClient.GetStream();
             bluetoothStream.ReadTimeout = 1000;
             while (true)
             {
                 while (!ready) ;
-                bluetoothStream.Write(message, 0, message.Length);
+                //bluetoothStream.Write(message, 0, message.Length);
+                //UpdateUI("Data sent: " + message.ToString());
+                bluetoothStream.Write(sendAngles, 0, sendAngles.Length);
+                UpdateUI("Data sent: " + sendAngles.ToString());
                 ready = false;
+            }
+        }
+        private void Reader_FrameArrived(object sender, BodyFrameArrivedEventArgs e)
+        {
+            //UpdateUI("Frame arrived");
+            bool dataReceived = false;
+
+            using (BodyFrame bodyFrame = e.FrameReference.AcquireFrame())
+            {
+                if (bodyFrame != null)
+                {
+                    if (this.bodies == null)
+                    {
+                        this.bodies = new Body[bodyFrame.BodyCount];
+                    }
+
+                    // The first time GetAndRefreshBodyData is called, Kinect will allocate each Body in the array.
+                    // As long as those body objects are not disposed and not set to null in the array,
+                    // those body objects will be re-used.
+                    bodyFrame.GetAndRefreshBodyData(this.bodies);
+                    dataReceived = true;
+                }
+            }
+            if (dataReceived)
+            {
+                //UpdateUI("Data Recieved");
+                foreach (Body body in bodies)
+                {
+                    if (body.IsTracked)
+                    {
+                        if (body.HandRightState == HandState.Closed)
+                        {
+                            sendAngles = Encoding.ASCII.GetBytes("Closed");
+                            ready = true;
+                        }
+                    }
+                }
             }
         }
 
@@ -176,5 +246,6 @@ namespace Kinect_Bluetooth
                 SendTextBox.Clear();
             }
         }
+        
     }
 }

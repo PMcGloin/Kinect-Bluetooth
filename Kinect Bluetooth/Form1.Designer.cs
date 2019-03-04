@@ -42,18 +42,18 @@ namespace Kinect_Bluetooth
             // 
             // InfoTextBox
             // 
-            this.InfoTextBox.Location = new System.Drawing.Point(12, 30);
+            this.InfoTextBox.Location = new System.Drawing.Point(12, 32);
             this.InfoTextBox.Multiline = true;
             this.InfoTextBox.Name = "InfoTextBox";
-            this.InfoTextBox.Size = new System.Drawing.Size(1450, 804);
+            this.InfoTextBox.Size = new System.Drawing.Size(710, 804);
             this.InfoTextBox.TabIndex = 0;
             // 
             // SendTextBox
             // 
-            this.SendTextBox.Location = new System.Drawing.Point(12, 840);
+            this.SendTextBox.Location = new System.Drawing.Point(12, 842);
             this.SendTextBox.Multiline = true;
             this.SendTextBox.Name = "SendTextBox";
-            this.SendTextBox.Size = new System.Drawing.Size(1450, 216);
+            this.SendTextBox.Size = new System.Drawing.Size(710, 163);
             this.SendTextBox.TabIndex = 1;
             this.SendTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.SendTextBox_KeyPress);
             // 
@@ -61,9 +61,9 @@ namespace Kinect_Bluetooth
             // 
             this.DevicesListBox.FormattingEnabled = true;
             this.DevicesListBox.ItemHeight = 25;
-            this.DevicesListBox.Location = new System.Drawing.Point(1468, 30);
+            this.DevicesListBox.Location = new System.Drawing.Point(728, 32);
             this.DevicesListBox.Name = "DevicesListBox";
-            this.DevicesListBox.Size = new System.Drawing.Size(302, 804);
+            this.DevicesListBox.Size = new System.Drawing.Size(308, 804);
             this.DevicesListBox.TabIndex = 2;
             this.DevicesListBox.DoubleClick += new System.EventHandler(this.DevicesListBox_DoubleClick);
             // 
@@ -71,7 +71,7 @@ namespace Kinect_Bluetooth
             // 
             this.connectionType.Controls.Add(this.SendRadioButton);
             this.connectionType.Controls.Add(this.ReceiveRadioButton);
-            this.connectionType.Location = new System.Drawing.Point(1468, 840);
+            this.connectionType.Location = new System.Drawing.Point(728, 842);
             this.connectionType.Name = "connectionType";
             this.connectionType.Size = new System.Drawing.Size(308, 71);
             this.connectionType.TabIndex = 3;
@@ -102,9 +102,9 @@ namespace Kinect_Bluetooth
             // 
             // GoButton
             // 
-            this.GoButton.Location = new System.Drawing.Point(1468, 917);
+            this.GoButton.Location = new System.Drawing.Point(728, 919);
             this.GoButton.Name = "GoButton";
-            this.GoButton.Size = new System.Drawing.Size(308, 139);
+            this.GoButton.Size = new System.Drawing.Size(308, 86);
             this.GoButton.TabIndex = 2;
             this.GoButton.Text = "GO";
             this.GoButton.UseVisualStyleBackColor = true;
@@ -114,7 +114,7 @@ namespace Kinect_Bluetooth
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1788, 1068);
+            this.ClientSize = new System.Drawing.Size(1048, 1017);
             this.Controls.Add(this.GoButton);
             this.Controls.Add(this.connectionType);
             this.Controls.Add(this.DevicesListBox);
@@ -122,6 +122,7 @@ namespace Kinect_Bluetooth
             this.Controls.Add(this.InfoTextBox);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.connectionType.ResumeLayout(false);
             this.connectionType.PerformLayout();
             this.ResumeLayout(false);
