@@ -20,7 +20,7 @@ namespace Kinect_Bluetooth
         {
             bluetoothDevices = new List<string>();
             InitializeComponent();
-            this.Load += Form1_Load;
+            Load += Form1_Load;
         }
 
         
@@ -152,6 +152,8 @@ namespace Kinect_Bluetooth
         BodyFrameReader bodyFrameReader;
         Body[] bodies;
         byte[] sendAngles;
+        string sendAnglesString;
+        int count;
         private void BluetoothSenderConnectCallback(IAsyncResult asyncResult)
         {
             
@@ -162,9 +164,9 @@ namespace Kinect_Bluetooth
                 sensor = KinectSensor.GetDefault();
                 bodyFrameReader = sensor.BodyFrameSource.OpenReader();
                 sensor.Open();
-                if (this.bodyFrameReader != null)
+                if (bodyFrameReader != null)
                 {
-                    this.bodyFrameReader.FrameArrived += this.Reader_FrameArrived;
+                    bodyFrameReader.FrameArrived += Reader_FrameArrived;
                 }
             }
             else
@@ -180,7 +182,10 @@ namespace Kinect_Bluetooth
                 //bluetoothStream.Write(message, 0, message.Length);
                 //UpdateUI("Data sent: " + message.ToString());
                 bluetoothStream.Write(sendAngles, 0, sendAngles.Length);
-                UpdateUI("Data sent: " + sendAngles.ToString());
+                sendAnglesString = Encoding.ASCII.GetString(sendAngles);
+                count++;
+                UpdateUI("Data sent: " + sendAnglesString + count.ToString());
+
                 ready = false;
             }
         }
@@ -193,15 +198,15 @@ namespace Kinect_Bluetooth
             {
                 if (bodyFrame != null)
                 {
-                    if (this.bodies == null)
+                    if (bodies == null)
                     {
-                        this.bodies = new Body[bodyFrame.BodyCount];
+                        bodies = new Body[bodyFrame.BodyCount];
                     }
 
                     // The first time GetAndRefreshBodyData is called, Kinect will allocate each Body in the array.
                     // As long as those body objects are not disposed and not set to null in the array,
                     // those body objects will be re-used.
-                    bodyFrame.GetAndRefreshBodyData(this.bodies);
+                    bodyFrame.GetAndRefreshBodyData(bodies);
                     dataReceived = true;
                 }
             }
