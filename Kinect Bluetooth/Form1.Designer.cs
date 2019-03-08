@@ -122,6 +122,7 @@ namespace Kinect_Bluetooth
             this.Controls.Add(this.InfoTextBox);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.connectionType.ResumeLayout(false);
             this.connectionType.PerformLayout();

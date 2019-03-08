@@ -4,8 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
-using InTheHand;
-using InTheHand.Net.Ports;
 using InTheHand.Net.Bluetooth;
 using InTheHand.Net.Sockets;
 using System.IO;
@@ -20,7 +18,6 @@ namespace Kinect_Bluetooth
         {
             bluetoothDevices = new List<string>();
             InitializeComponent();
-            Load += Form1_Load;
         }
 
         
@@ -29,7 +26,20 @@ namespace Kinect_Bluetooth
             
         }
 
-        
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (bodyFrameReader != null)
+            {
+                // BodyFrameReader is IDisposable
+                bodyFrameReader.Dispose();
+                bodyFrameReader = null;
+            }
+            if (kinectSensor != null)
+            {
+                kinectSensor.Close();
+                kinectSensor = null;
+            }
+        }
 
         private void GoButton_Click(object sender, EventArgs e)
         {
@@ -148,12 +158,13 @@ namespace Kinect_Bluetooth
             bluetoothClient.BeginConnect(deviceInfo.DeviceAddress, BluetoothService.SerialPort, new AsyncCallback(BluetoothSenderConnectCallback), bluetoothClient);
         }
 
-        KinectSensor sensor;
+        KinectSensor kinectSensor;
         BodyFrameReader bodyFrameReader;
         Body[] bodies;
         byte[] sendAngles;
         string sendAnglesString;
         int count;
+        
         private void BluetoothSenderConnectCallback(IAsyncResult asyncResult)
         {
             
@@ -161,9 +172,9 @@ namespace Kinect_Bluetooth
             if (bluetoothClient.Connected == true)
             {
                 UpdateUI("Bluetooth Connected ... Starting Kinect");
-                sensor = KinectSensor.GetDefault();
-                bodyFrameReader = sensor.BodyFrameSource.OpenReader();
-                sensor.Open();
+                kinectSensor = KinectSensor.GetDefault();
+                bodyFrameReader = kinectSensor.BodyFrameSource.OpenReader();
+                kinectSensor.Open();
                 if (bodyFrameReader != null)
                 {
                     bodyFrameReader.FrameArrived += Reader_FrameArrived;
@@ -217,11 +228,9 @@ namespace Kinect_Bluetooth
                 {
                     if (body.IsTracked)
                     {
-                        if (body.HandRightState == HandState.Closed)
-                        {
-                            sendAngles = Encoding.ASCII.GetBytes("Closed");
-                            ready = true;
-                        }
+                       
+                        sendAngles = Encoding.ASCII.GetBytes(body.HandRightState.ToString());
+                        ready = true;
                     }
                 }
             }
